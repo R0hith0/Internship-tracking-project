@@ -1,6 +1,6 @@
 const { z } = require("zod");
 
-const internshipSchema = z.object({
+const jobSchema = z.object({
 
     companyName: z.string().min(1, "Company name is required"),
     role: z.string().min(1, "Role is required"),
@@ -16,4 +16,4 @@ const internshipSchema = z.object({
     workingHours: z.string().min(1, "Working hours is required")
 });
 
-module.exports = internshipSchema;
+module.exports = jobSchema;

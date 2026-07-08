@@ -1,101 +1,242 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import InternshipCard from "./components/InternshipCard";
+
+import Header from "./components/header/header";
+import JobGrid from "./components/JobGrid/JobGrid";
+import DashboardLayout from "./components/DashboardLayout/DashboardLayout";
+import FilterSidebar from "./components/FilterSidebar/FilterSidebar";
+
 import "./App.css";
 
+
 function App() {
+
   const [internships, setInternships] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("All");
+  const [sort, setSort] = useState("Latest");
+
+
+  const [filters, setFilters] = useState({
+
+    schedule: [],
+
+    workMode: [],
+
+    employmentType: []
+
+  });
+
+
 
   useEffect(() => {
+
     axios
-      .get("http://localhost:3000/api/internships")
+      .get("http://localhost:3000/api/jobs")
+
       .then((res) => {
+
         const data = Array.isArray(res.data)
           ? res.data
           : res.data.data;
 
+
         setInternships(data || []);
+
         setLoading(false);
+
       })
+
       .catch(() => {
+
         setInternships([]);
+
         setLoading(false);
+
       });
+
+
   }, []);
 
-  
+
+
+
+
   const filteredInternships = internships.filter((item) => {
+
+
     const matchesSearch =
-      item.companyName?.toLowerCase().includes(search.toLowerCase()) ||
-      item.role?.toLowerCase().includes(search.toLowerCase());
 
-    const matchesFilter =
-      filter === "All" ||
-      item.workMode?.toUpperCase() === filter;
+      item.companyName
+        ?.toLowerCase()
+        .includes(search.toLowerCase())
 
-    return matchesSearch && matchesFilter;
+      ||
+
+      item.role
+        ?.toLowerCase()
+        .includes(search.toLowerCase());
+
+
+
+
+
+    const matchesSchedule =
+
+      filters.schedule.length === 0 ||
+
+      filters.schedule.includes(item.schedule);
+
+
+
+
+
+    const matchesWorkMode =
+
+      filters.workMode.length === 0 ||
+
+      filters.workMode.includes(item.workMode?.toUpperCase());
+
+
+
+
+
+    const matchesEmployment =
+
+      filters.employmentType.length === 0 ||
+
+      filters.employmentType.includes(item.employmentType);
+
+
+
+
+
+    return (
+
+      matchesSearch &&
+
+      matchesSchedule &&
+
+      matchesWorkMode &&
+
+      matchesEmployment
+
+    );
+
+
   });
 
+
+
+
+
+
+  const sortedInternships = [...filteredInternships].sort((a, b) => {
+
+
+    const dateA = new Date(a.createdAt);
+
+    const dateB = new Date(b.createdAt);
+
+
+
+    if (sort === "Latest") {
+
+      return dateB - dateA;
+
+    }
+
+
+
+    return dateA - dateB;
+
+
+  });
+
+
+
+
+
+
   return (
+
     <div className="app">
 
-      
-      <header className="topbar">
 
-        <div className="logo">
-          Internship Tracker
-        </div>
+      <Header
 
-        <input
-          type="text"
-          placeholder="Search company or role..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="topbar-search"
-        />
+        search={search}
 
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="topbar-select"
-        >
-          <option value="ALL">All</option>
-          <option value="REMOTE">Remote</option>
-          <option value="ONSITE">Onsite</option>
-          <option value="HYBRID">Hybrid</option>
-        </select>
+        setSearch={setSearch}
 
-      </header>
+        sort={sort}
 
-     
+        setSort={setSort}
+
+      />
+
+
+
+
+
       <main className="container">
 
-        {loading ? (
-          <p>Loading...</p>
-        ) : filteredInternships.length === 0 ? (
-          <p>No internships found</p>
-        ) : (
-          <div className="grid">
-            {filteredInternships.map((item, index) => (
-              <InternshipCard
-                key={index}
-                companyName={item.companyName}
-                role={item.role}
-                workMode={item.workMode}
-                stipend={item.stipend}
+
+        <DashboardLayout>
+
+
+
+          <FilterSidebar
+
+            filters={filters}
+
+            setFilters={setFilters}
+
+          />
+
+
+
+
+
+          {
+
+            loading ? (
+
+              <p>Loading...</p>
+
+
+            ) : sortedInternships.length === 0 ? (
+
+              <p>No jobs found</p>
+
+
+            ) : (
+
+              <JobGrid
+
+                jobs={sortedInternships}
+
               />
-            ))}
-          </div>
-        )}
+
+            )
+
+          }
+
+
+
+        </DashboardLayout>
+
 
       </main>
 
+
     </div>
+
   );
+
+
 }
+
 
 export default App;

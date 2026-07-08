@@ -1,0 +1,81 @@
+.filter-sidebar {
+
+  width: 240px;
+
+  flex-shrink: 0;
+
+  padding: 20px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 16px;
+
+  background: white;
+
+}
+
+
+
+.filter-sidebar h3 {
+
+  margin-bottom: 24px;
+
+}
+
+
+
+
+
+.filter-section {
+
+  margin-bottom: 24px;
+
+}
+
+
+
+
+
+.filter-section p {
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  margin-bottom: 12px;
+
+}
+
+
+
+
+
+.filter-option {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+}
+
+
+
+
+
+.filter-option input {
+
+  width: 16px;
+
+  height: 16px;
+
+  cursor: pointer;
+
+}

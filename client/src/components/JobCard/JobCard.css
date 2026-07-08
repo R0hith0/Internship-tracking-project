@@ -1,0 +1,432 @@
+/* =========================
+   ROLE CARD
+========================= */
+
+.job-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 22px;
+
+  min-height: 230px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+
+  border: none;
+
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+}
+
+
+.job-card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow: 0 14px 30px rgba(0,0,0,0.10);
+
+}
+
+
+
+/* =========================
+   INNER HEADER CARD
+========================= */
+
+.job-card-header {
+
+  display: flex;
+
+  flex-direction: column;
+
+
+  gap: 16px;
+
+
+  background: #f8fafc;
+
+
+  border-radius: 16px;
+
+
+  padding: 22px;
+
+
+  height: 130px;
+
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+/* =========================
+   COMPANY SECTION
+========================= */
+
+
+.job-card-company-section {
+
+  display: flex;
+
+  align-items: center;
+
+
+  gap: 16px;
+
+}
+
+
+
+
+
+/* =========================
+   LOGO
+========================= */
+
+
+.job-card-logo {
+
+  width: 50px;
+
+  height: 50px;
+
+
+  border-radius: 50%;
+
+
+  background: #111827;
+
+
+  color: white;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: center;
+
+
+  font-size: 18px;
+
+
+  font-weight: 700;
+
+
+  flex-shrink: 0;
+
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+/* =========================
+   COMPANY NAME
+========================= */
+
+
+.job-card-company {
+
+  margin: 0;
+
+
+  font-size: 13px;
+
+
+  font-weight: 500;
+
+
+  color: #6b7280;
+
+
+  white-space: nowrap;
+
+
+  overflow: hidden;
+
+
+  text-overflow: ellipsis;
+
+}
+
+
+
+
+
+/* =========================
+   ROLE TITLE
+========================= */
+
+
+.job-card-title {
+
+  margin: 6px 0 0;
+
+
+  font-size: 22px;
+
+
+  font-weight: 700;
+
+
+  color: #111827;
+
+
+  line-height: 1.3;
+
+
+  display: -webkit-box;
+
+
+  -webkit-line-clamp: 2;
+
+
+  -webkit-box-orient: vertical;
+
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+/* =========================
+   PILLS CONTAINER
+========================= */
+
+
+.job-card-tags {
+
+  display: flex;
+
+
+  gap: 8px;
+
+
+  flex-wrap: wrap;
+
+
+  height: 26px;
+
+
+  overflow: hidden;
+
+}
+
+
+
+
+
+/* =========================
+   PILLS
+========================= */
+
+
+.job-card-tag {
+
+  background: white;
+
+
+  border: 1px solid #e5e7eb;
+
+
+  color: #374151;
+
+
+  padding: 4px 10px;
+
+
+  border-radius: 999px;
+
+
+  font-size: 11px;
+
+
+  font-weight: 600;
+
+
+  height: 18px;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  white-space: nowrap;
+
+}
+
+
+
+
+
+/* =========================
+   INFO
+========================= */
+
+
+.job-card-info {
+
+  margin-top: 24px;
+
+}
+
+
+
+
+
+.job-card-salary {
+
+  margin: 0;
+
+
+  font-size: 15px;
+
+
+  font-weight: 600;
+
+
+  color: #111827;
+
+}
+
+
+
+
+
+.job-card-status {
+
+  margin: 6px 0 0;
+
+
+  font-size: 14px;
+
+
+  color: #10b981;
+
+}
+
+
+
+
+
+/* =========================
+   FOOTER
+========================= */
+
+
+.job-card-footer {
+
+  margin-top: 20px;
+
+
+  padding: 0;
+
+
+  background: transparent;
+
+
+  display: flex;
+
+
+  justify-content: space-between;
+
+
+  align-items: center;
+
+}
+
+
+
+
+
+.job-card-location {
+
+  margin: 0;
+
+
+  font-size: 14px;
+
+
+  color: #6b7280;
+
+}
+
+
+
+
+
+/* =========================
+   BUTTON
+========================= */
+
+
+.job-card-button {
+
+  border: none;
+
+
+  background: #111827;
+
+
+  color: white;
+
+
+  padding: 9px 16px;
+
+
+  border-radius: 8px;
+
+
+  cursor: pointer;
+
+
+  font-size: 14px;
+
+
+  font-weight: 500;
+
+
+  transition: 0.2s ease;
+
+}
+
+
+
+
+
+.job-card-button:hover {
+
+  background: #000;
+
+
+  transform: translateY(-2px);
+
+}

@@ -14,8 +14,8 @@ app.use(express.json());
 connectDB();
 
 
-const internshipRoutes = require("./routes/internshipRoutes");
-app.use("/api/internships", internshipRoutes);
+const jobRoutes = require("./routes/jobRoutes");
+app.use("/api/jobs", jobRoutes);
 
 
 app.get("/", (req, res) => {

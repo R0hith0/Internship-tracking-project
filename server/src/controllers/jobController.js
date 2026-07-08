@@ -1,11 +1,11 @@
-const Internship = require("../models/Internship");
-const internshipSchema = require("../validators/internshipValidator");
+const Job = require("../models/Job");
+const jobSchema = require("../validators/jobValidator");
 
 // CREATE
-exports.createInternship = async (req, res) => {
+exports.createJob = async (req, res) => {
     try {
         // Validate request body
-        const result = internshipSchema.safeParse(req.body);
+        const result = jobSchema.safeParse(req.body);
 
         if (!result.success) {
             return res.status(400).json({
@@ -19,10 +19,10 @@ exports.createInternship = async (req, res) => {
             req.body.workMode = req.body.workMode.toUpperCase();
         }
 
-        const data = await Internship.create(req.body);
+        const data = await Job.create(req.body);
 
         res.status(201).json({
-            message: "Internship created successfully",
+            message: "Job created successfully",
             data
         });
 
@@ -34,8 +34,8 @@ exports.createInternship = async (req, res) => {
     }
 };
 
-// Get all internships with optional features included 
-exports.getInternships = async (req, res) => {
+// Get all jobs with optional features included 
+exports.getJobs = async (req, res) => {
     try {
         const filter = {};
 
@@ -89,23 +89,23 @@ exports.getInternships = async (req, res) => {
         }
 
         
-        const totalInternships = await Internship.countDocuments(filter);
+        const totalJobs = await Job.countDocuments(filter);
 
-        const totalPages = Math.max(1, Math.ceil(totalInternships / limit));
+        const totalPages = Math.max(1, Math.ceil(totalJobs / limit));
         const hasNextPage = page < totalPages;
         const hasPreviousPage = page > 1;
 
    
-        const data = await Internship.find(filter)
+        const data = await Job.find(filter)
             .sort(sortOption)
             .skip(skip)
             .limit(limit);
 
         res.status(200).json({
-            message: "Internships fetched successfully",
+            message: "Jobs fetched successfully",
             page,
             limit,
-            totalInternships,
+            totalJobs,
             totalPages,
             hasNextPage,
             hasPreviousPage,
@@ -121,18 +121,18 @@ exports.getInternships = async (req, res) => {
 };
 
 // searching by the id 
-exports.getInternshipById = async (req, res) => {
+exports.getJobById = async (req, res) => {
     try {
-        const data = await Internship.findById(req.params.id);
+        const data = await Job.findById(req.params.id);
 
         if (!data) {
             return res.status(404).json({
-                message: "Internship not found"
+                message: "Job not found"
             });
         }
 
         res.status(200).json({
-            message: "Internship fetched successfully",
+            message: "Job fetched successfully",
             data
         });
 
@@ -145,13 +145,13 @@ exports.getInternshipById = async (req, res) => {
 };
 
 // updating info
-exports.updateInternship = async (req, res) => {
+exports.updateJob = async (req, res) => {
     try {
         if (req.body.workMode) {
             req.body.workMode = req.body.workMode.toUpperCase();
         }
 
-        const data = await Internship.findByIdAndUpdate(
+        const data = await Job.findByIdAndUpdate(
             req.params.id,
             req.body,
             { returnDocument: "after" }
@@ -159,12 +159,12 @@ exports.updateInternship = async (req, res) => {
 
         if (!data) {
             return res.status(404).json({
-                message: "Internship not found"
+                message: "Job not found"
             });
         }
 
         res.status(200).json({
-            message: "Internship updated successfully",
+            message: "Job updated successfully",
             data
         });
 
@@ -177,18 +177,18 @@ exports.updateInternship = async (req, res) => {
 };
 
 // deleting
-exports.deleteInternship = async (req, res) => {
+exports.deleteJob = async (req, res) => {
     try {
-        const data = await Internship.findByIdAndDelete(req.params.id);
+        const data = await Job.findByIdAndDelete(req.params.id);
 
         if (!data) {
             return res.status(404).json({
-                message: "Internship not found"
+                message: "Job not found"
             });
         }
 
         res.status(200).json({
-            message: "Internship deleted successfully"
+            message: "Job deleted successfully"
         });
 
     } catch (err) {
